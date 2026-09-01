@@ -3,90 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Special Someone</title>
+    <title>Will You Be Mine?</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body {
             text-align: center; font-family: 'Poppins', sans-serif; height: 100vh;
             display: flex; flex-direction: column; justify-content: center;
-            align-items: center; background: linear-gradient(135deg, #ffb3c1 0%, #ffc8dd 100%);
+            align-items: center; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             margin: 0; overflow: hidden;
         }
         h1 { color: #fff; font-size: 3rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-        .buttons { position: relative; width: 450px; height: 100px; display: flex; justify-content: center; }
+        .buttons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
         button {
-            padding: 15px 30px; font-size: 20px; border: none; border-radius: 50px;
+            padding: 15px 30px; font-size: 18px; border: none; border-radius: 50px;
             cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            font-weight: 600; position: absolute;
+            font-weight: 600;
         }
-        #yes { background-color: #ffffff; color: #ff4d6d; }
-        #no { background-color: #4a4a4a; color: white; right: 100px; }
+        #yes { background-color: #ffffff; color: #ff6a6a; }
+        #yes:hover { transform: scale(1.1); }
+        #no { background-color: #4a4a4a; color: white; }
         #step2, #step3, #step4 { display: none; }
-        .option-btn { background-color: #ffffff; color: #ff4d6d; margin: 10px; padding: 15px 25px; border-radius: 30px; border: none; cursor: pointer; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .quote { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #fff; line-height: 1.5; }
+        .option-btn { background-color: #ffffff; color: #ff6a6a; margin: 10px; padding: 15px 25px; border-radius: 30px; border: none; cursor: pointer; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .option-btn:hover { transform: scale(1.05); }
+        .quote { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #fff; line-height: 1.5; }
     </style>
 </head>
 <body>
     <div id="step1">
-        <h1 id="question">Will you go on a date with me?</h1>
+        <h1>Will you go on a date with me?</h1>
         <div class="buttons">
             <button id="yes" onclick="nextStep(2)">Yes</button>
-            <button id="no" onmouseover="moveNo()">No</button>
+            <button id="no" onclick="handleNo()">No</button>
         </div>
     </div>
 
     <div id="step2">
         <h1>Which date works for you?</h1>
-        <button class="option-btn" onclick="nextStep(3)">This Saturday?</button>
-        <button class="option-btn" onclick="nextStep(3)">This Sunday?</button>
-        <button class="option-btn" onclick="nextStep(4)">Surprise Date! (Choose this)</button>
+        <button class="option-btn" onclick="nextStep(4)">This Saturday (Sept 5)</button>
+        <button class="option-btn" onclick="nextStep(4)">This Sunday (Sept 6)</button>
+        <button class="option-btn" onclick="nextStep(4)">Next Saturday (Sept 12)</button>
+        <button class="option-btn" onclick="nextStep(3)">Surprise Date!</button>
     </div>
 
     <div id="step3">
-        <h1>What's the plan?</h1>
-        <button class="option-btn" onclick="nextStep(5)">Movie Night</button>
-        <button class="option-btn" onclick="optionSelected()">Clubbing</button>
-        <button class="option-btn" onclick="optionSelected()">Dancing</button>
-        <button class="option-btn" onclick="optionSelected()">Singing</button>
+        <h1>What's the plan for our Surprise Date?</h1>
+        <button class="option-btn" onclick="nextStep(4)">Movie Night</button>
+        <button class="option-btn" onclick="nextStep(4)">Clubbing & Dancing</button>
+        <button class="option-btn" onclick="nextStep(4)">Singing Together</button>
+        <button class="option-btn" onclick="nextStep(4)">Quality Time</button>
     </div>
 
     <div id="step4">
-        <h1>I want to give you a special time...</h1>
-        <button class="option-btn" onclick="nextStep(5)">Quality Time</button>
-    </div>
-
-    <div id="step5">
         <h1>You are my world!</h1>
         <p class="quote">"In your smile, I see something more beautiful than the stars. And with you, every moment is a precious memory."</p>
     </div>
 
     <script>
         const noMessages = [
-            "Please select Yes!",
-            "Select Yes, please?",
-            "Bol do na Yes!",
-            "Yes bol do na, please!",
-            "Don't break my heart!"
+            "Are you sure?",
+            "Think again!",
+            "Last chance!",
+            "Surely not?",
+            "Don't break my heart!",
+            "Please say Yes!"
         ];
         let messageIndex = 0;
-        let yesSize = 20;
 
-        function moveNo() {
-            var btn = document.getElementById("no");
-            var x = Math.random() * (window.innerWidth - 100);
-            var y = Math.random() * (window.innerHeight - 100);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-
+        function handleNo() {
             var yesBtn = document.getElementById("yes");
-            yesSize += 5;
-            yesBtn.style.fontSize = yesSize + 'px';
+            var noBtn = document.getElementById("no");
+            
+            var currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize + 10) + 'px';
+            yesBtn.style.padding = (15 + messageIndex*5) + 'px ' + (30 + messageIndex*10) + 'px';
 
             if (messageIndex < noMessages.length) {
-                btn.innerHTML = noMessages[messageIndex];
+                noBtn.innerHTML = noMessages[messageIndex];
                 messageIndex++;
             } else {
-                btn.innerHTML = "Bas, ab Yes bolo!";
+                noBtn.innerHTML = "Bas, ab Yes bolo!";
             }
         }
 
@@ -95,17 +90,13 @@
             document.getElementById('step2').style.display = 'none';
             document.getElementById('step3').style.display = 'none';
             document.getElementById('step4').style.display = 'none';
-            document.getElementById('step5').style.display = 'none';
             
-            document.getElementById('step' + step).style.display = 'flex';
-            document.getElementById('step' + step).style.flexDirection = 'column';
-            document.getElementById('step' + step).style.justifyContent = 'center';
-            document.getElementById('step' + step).style.alignItems = 'center';
-            document.getElementById('step' + step).style.height = '100vh';
-        }
-
-        function optionSelected() {
-            nextStep(5);
+            var nextStepDiv = document.getElementById('step' + step);
+            nextStepDiv.style.display = 'flex';
+            nextStepDiv.style.flexDirection = 'column';
+            nextStepDiv.style.justifyContent = 'center';
+            nextStepDiv.style.alignItems = 'center';
+            nextStepDiv.style.height = '100vh';
         }
     </script>
 </body>
