@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #ffeff3; }
-        h1 { color: #d63384; margin-bottom: 20px; }
-        .buttons { position: relative; width: 300px; height: 100px; }
-        button { padding: 10px 20px; font-size: 18px; border: none; border-radius: 5px; cursor: pointer; position: absolute; }
-        #yes { background-color: #28a745; color: white; top: 0; left: 0; }
-        #no { background-color: #dc3545; color: white; top: 0; right: 0; }
+        body {
+            text-align: center; font-family: 'Poppins', sans-serif; height: 100vh;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            margin: 0; overflow: hidden;
+        }
+        h1 { color: #fff; font-size: 3rem; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .buttons { position: relative; width: 400px; height: 100px; display: flex; justify-content: center; gap: 50px; }
+        button {
+            padding: 15px 30px; font-size: 20px; border: none; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+        #yes { background-color: #ffffff; color: #ff6a6a; }
+        #yes:hover { transform: scale(1.1); background-color: #fff0f0; }
+        #no { background-color: #ff6a6a; color: white; position: absolute; }
     </style>
 </head>
 <body>
@@ -18,16 +30,38 @@
     </div>
 
     <script>
+        const noMessages = [
+            "Are you sure?",
+            "Think again!",
+            "Last chance!",
+            "Surely not?",
+            "Don't break my heart!"
+        ];
+        let messageIndex = 0;
+        let yesSize = 20;
+
         function moveButton() {
             var btn = document.getElementById("no");
-            var x = Math.random() * 200 - 100;
-            var y = Math.random() * 200 - 100;
-            btn.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+            var x = Math.random() * (window.innerWidth - 100);
+            var y = Math.random() * (window.innerHeight - 100);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+
+            var yesBtn = document.getElementById("yes");
+            yesSize += 10;
+            yesBtn.style.fontSize = yesSize + 'px';
+
+            if (messageIndex < noMessages.length) {
+                btn.innerHTML = noMessages[messageIndex];
+                messageIndex++;
+            } else {
+                btn.innerHTML = "Okay, fine!";
+            }
         }
         function nextStep() {
             document.getElementById("question").innerHTML = "Yay! See you on our date!";
-            document.getElementById("yes").style.display = 'none';
-            document.getElementById("no").style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            document.body.style.background = "linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%)";
         }
     </script>
 </body>
