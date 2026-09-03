@@ -1,190 +1,269 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Special Surprise For You ❤️</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      color: #333;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 30px;
-      width: 100%;
-      max-width: 550px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-      text-align: center;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .step {
-      display: none;
-    }
-    .step.active {
-      display: block;
-      animation: fadeIn 0.6s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    h2 {
-      color: #d63384;
-      margin-bottom: 15px;
-      font-size: 1.6rem;
-    }
-    p {
-      color: #555;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    .options-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .btn {
-      background: #ff4b2b;
-      background: linear-gradient(to right, #ff416c, #ff4b2b);
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: 600;
-      box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
-    }
-    .btn-no {
-      background: #6c757d;
-      position: absolute;
-      transition: all 0.2s ease;
-    }
-    .img-preview {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    .quote-box {
-      background: #fff0f5;
-      border-left: 4px solid #d63384;
-      padding: 15px;
-      border-radius: 8px;
-      font-style: italic;
-      color: #8b008b;
-      margin-top: 15px;
-      font-size: 1.05rem;
-    }
-  </style>
+  <meta name="theme-color" content="#ff6f91">
+  <title>For Cuteu ❤️</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="card">
-    
-    <!-- STEP 1: Interactive Choice -->
-    <div id="step1" class="step active">
-      <h2>क्या तुम मेरे साथ एक स्पेशल डेट पर चलोगी? ❤️</h2>
-      <p>अपनी पसंद की परफेक्ट डेट चुनो:</p>
-      <div class="options-grid">
-        <button class="btn" onclick="selectOption('beach')">🏖️ Beach Walk & Sunset</button>
-        <button class="btn" onclick="selectOption('dinner')">🍷 Candlelight Dinner</button>
-        <button class="btn" onclick="selectOption('drive')">☕ Long Drive & Coffee</button>
+  <div id="hearts-container"></div>
+
+  <main>
+
+    <!-- STEP 1 -->
+    <section class="page active" id="page1">
+      <div class="card">
+        <div class="emoji">🌸</div>
+        <p class="small-title">A little surprise for you</p>
+        <h1>Hey, Cuteu ❤️</h1>
+
+        <p class="message">
+          Tanishka, मैंने तुम्हारे लिए ये छोटी-सी जगह बनाई है।
+          कोई pressure नहीं, बस कुछ प्यारे सवाल,
+          कुछ यादें और दिल से निकली कुछ बातें।
+        </p>
+
+        <button class="primary-btn" onclick="nextPage()">
+          Open My Surprise 💖
+        </button>
       </div>
-      <div style="position: relative; height: 50px; margin-top: 10px;">
-        <button id="noBtn" class="btn btn-no" onmouseover="moveNoBtn()" onclick="moveNoBtn()">नहीं 😜</button>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="page" id="page2">
+      <div class="card">
+        <div class="emoji">☕</div>
+        <p class="small-title">Question 01</p>
+        <h2>Coffee Date?</h2>
+
+        <p class="message">
+          अगर कभी मौका मिले, तो क्या तुम मेरे साथ
+          एक simple coffee date पर जाना चाहोगी?
+        </p>
+
+        <div class="choices">
+          <button class="choice-btn" onclick="answerAndNext('Coffee Date ❤️')">
+            हाँ ❤️
+          </button>
+
+          <button class="choice-btn secondary" onclick="answerAndNext('Maybe Someday 🌸')">
+            शायद कभी 🌸
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- STEP 2: Selected Option View -->
-    <div id="step2" class="step">
-      <h2 id="dateTitle"></h2>
-      <img id="dateImg" class="img-preview" src="" alt="Date Choice">
-      <p id="dateDesc"></p>
-      <button class="btn" onclick="goToStep(3)">आगे बढ़ें ❤️</button>
-    </div>
+    <!-- STEP 3 -->
+    <section class="page" id="page3">
+      <div class="card">
+        <div class="emoji">🌅</div>
+        <p class="small-title">Question 02</p>
+        <h2>Sunset Plan?</h2>
 
-    <!-- STEP 3: Personal Message -->
-    <div id="step3" class="step">
-      <h2>तुम मेरे लिए बहुत खास हो ✨</h2>
-      <p>तुम्हारी मुस्कान और तुम्हारी हिम्मत मेरे लिए सबसे कीमती है। मैं हर कदम पर तुम्हारे साथ खड़ा रहना चाहता हूँ।</p>
-      <button class="btn" onclick="goToStep(4)">A Note For Your Dream ⚖️</button>
-    </div>
+        <p class="message">
+          क्या तुम कभी मेरे साथ sunset देखते हुए
+          बस थोड़ी देर शांत बैठना चाहोगी?
+        </p>
 
-    <!-- STEP 4: Ultimate Motivational Quote for Future Judge -->
-    <div id="step4" class="step">
-      <h2>Your Future as a Judge ⚖️👩‍⚖️</h2>
-      <img src="watermarked_img_16076145427201576466.png" class="img-preview" alt="Scales of Justice">
-      <p>सुनो, लाइफ में चाहें कोई तुम्हारे साथ रहे या न रहे, मैं हमेशा तुम्हारे साथ रहूँगा। तुम्हें किसी से भी डरने की ज़रूरत नहीं है—चाहे परिस्थितियां कैसी भी हों। तुम एक दिन बेहतरीन जज बनोगी!</p>
-      
-      <div class="quote-box">
-        "न्याय की कुर्सी तुम्हारा इंतज़ार कर रही है। डर को पीछे छोड़ो और पंख फैलाओ, क्योंकि एक दिन तुम्हारा फ़ैसला ही दुनिया सुनेगी।"
+        <div class="choices">
+          <button class="choice-btn" onclick="answerAndNext('Sunset 🌅')">
+            बिल्कुल ❤️
+          </button>
+
+          <button class="choice-btn secondary" onclick="answerAndNext('Maybe 🌷')">
+            Maybe 🌷
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
 
+    <!-- STEP 4 -->
+    <section class="page" id="page4">
+      <div class="card">
+        <div class="emoji">🎬</div>
+        <p class="small-title">Question 03</p>
+        <h2>Movie Date?</h2>
+
+        <p class="message">
+          एक अच्छी movie, snacks और बहुत सारी बातें...
+          कैसी रहेगी ये छोटी-सी date?
+        </p>
+
+        <div class="choices">
+          <button class="choice-btn" onclick="answerAndNext('Movie Date 🎬')">
+            Sounds Nice ❤️
+          </button>
+
+          <button class="choice-btn secondary" onclick="answerAndNext('Another Time 🌸')">
+            Another Time 🌸
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5 -->
+    <section class="page" id="page5">
+      <div class="card">
+        <div class="emoji">🚗</div>
+        <p class="small-title">Question 04</p>
+        <h2>Long Drive?</h2>
+
+        <p class="message">
+          कोई अच्छा music, खुली सड़क और रास्ते भर बातें...
+          क्या ये plan अच्छा लगेगा?
+        </p>
+
+        <div class="choices">
+          <button class="choice-btn" onclick="answerAndNext('Long Drive 🚗')">
+            Let's Go ❤️
+          </button>
+
+          <button class="choice-btn secondary" onclick="answerAndNext('Maybe Later 🌷')">
+            Maybe Later 🌷
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 6 -->
+    <section class="page" id="page6">
+      <div class="card">
+        <div class="emoji">💌</div>
+        <p class="small-title">One honest thing</p>
+        <h2>For You, Cuteu</h2>
+
+        <p class="message">
+          सच कहूँ तो तुम मुझे बहुत पसंद हो।
+          लेकिन इस पूरे surprise का सबसे important हिस्सा
+          कोई answer नहीं है।
+        </p>
+
+        <p class="message">
+          मैं बस चाहता हूँ कि तुम अपनी जिंदगी में आगे बढ़ो,
+          अपने सपनों को पूरा करो और खुद पर भरोसा रखो।
+        </p>
+
+        <button class="primary-btn" onclick="nextPage()">
+          There's More 🌸
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 7 PHOTO GALLERY -->
+    <section class="page" id="page7">
+      <div class="card wide">
+        <p class="small-title">A little gallery</p>
+        <h2>Beautiful You 🌷</h2>
+
+        <div class="gallery">
+
+          <figure>
+            <img src="images/photo1.jpeg" alt="Cuteu photo 1">
+            <figcaption>Keep that beautiful smile. ❤️</figcaption>
+          </figure>
+
+          <figure>
+            <img src="images/photo2.jpeg" alt="Cuteu photo 2">
+            <figcaption>You deserve peaceful and happy days. 🌸</figcaption>
+          </figure>
+
+          <figure>
+            <img src="images/photo3.jpeg" alt="Cuteu photo 3">
+            <figcaption>Never forget how strong you are. ✨</figcaption>
+          </figure>
+
+          <figure>
+            <img src="images/photo4.jpeg" alt="Cuteu photo 4">
+            <figcaption>Your story is still being written. 💗</figcaption>
+          </figure>
+
+        </div>
+
+        <button class="primary-btn" onclick="nextPage()">
+          Read Something Important 💌
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 8 MOTIVATION -->
+    <section class="page" id="page8">
+      <div class="card">
+        <div class="emoji">🌱</div>
+        <p class="small-title">For the days when life feels difficult</p>
+        <h2>Don't Give Up, Cuteu ❤️</h2>
+
+        <div class="quote">
+          “तुम्हारी आज की मुश्किलें तुम्हारी पूरी कहानी नहीं हैं।”
+        </div>
+
+        <p class="message">
+          कभी-कभी ऐसा लगता है कि कोई हमें समझ नहीं रहा,
+          कोई हमारा साथ नहीं दे रहा और रास्ता बहुत मुश्किल है।
+          लेकिन इसका मतलब ये नहीं कि तुम अपने सपनों तक नहीं पहुँच सकती।
+        </p>
+
+        <p class="message">
+          धीरे चलना भी आगे बढ़ना है।
+          कुछ दिन मुश्किल होंगे, कुछ दिन बहुत अच्छे होंगे—
+          लेकिन हर दिन तुम्हें तुम्हारी मंज़िल के थोड़ा और करीब ले जा सकता है।
+        </p>
+
+        <div class="quote">
+          “अपने आप पर भरोसा रखना — तुम्हारे सपने तुम्हारे हैं,
+          इसलिए उन्हें पूरा करने की कोशिश भी तुम्हारी अपनी ताकत है।”
+        </div>
+
+        <button class="primary-btn" onclick="nextPage()">
+          One Last Thing ❤️
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 9 FINAL -->
+    <section class="page" id="page9">
+      <div class="card final-card">
+        <div class="big-heart">❤️</div>
+
+        <p class="small-title">For my Cuteu</p>
+
+        <h1>You Matter. 🌷</h1>
+
+        <p class="message">
+          मैं ये promise नहीं कर सकता कि जिंदगी हमेशा आसान होगी।
+          लेकिन मैं इतना जरूर चाहता हूँ कि तुम खुद को कभी कम मत समझना।
+        </p>
+
+        <p class="message">
+          अपने सपनों के लिए कोशिश करते रहना,
+          अपने लिए खुश रहना और अपनी पहचान को कभी मत खोना।
+        </p>
+
+        <p class="message highlight">
+          और अगर कभी तुम्हें लगे कि तुम अकेली हो,
+          तो याद रखना — कहीं न कहीं कोई तुम्हारे लिए
+          genuinely खुशियाँ चाहता है। ❤️
+        </p>
+
+        <div class="final-line">
+          Stay strong. Stay kind. Stay you. 🌸
+        </div>
+
+        <button class="primary-btn" onclick="restartExperience()">
+          Read Again 💕
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="progress">
+    <span id="progressText">1 / 9</span>
   </div>
 
-  <script>
-    const optionsData = {
-      beach: {
-        title: "🏖️ Beach Walk & Sunset",
-        img: "watermarked_img_7152145334050398179.png",
-        desc: "समंदर की लहरें, ढलता सूरज और तुम्हारा हाथ... यह पल हमारे लिए बेहद ख़ास होगा!"
-      },
-      dinner: {
-        title: "🍷 Candlelight Dinner",
-        img: "watermarked_img_9960020201676328476.png",
-        desc: "मद्धम रोशनी, प्यारी बातें और सिर्फ़ हम दो। एक यादों से भरी ख़ास शाम!"
-      },
-      drive: {
-        title: "☕ Long Drive & Coffee",
-        img: "watermarked_img_10360777481624303799.png",
-        desc: "खुली सड़कें, धीमी म्यूज़िक और गर्मागर्म कॉफ़ी के साथ तुम्हारे साथ बिताया हर लम्हा।"
-      }
-    };
-
-    function selectOption(key) {
-      document.getElementById('dateTitle').innerText = optionsData[key].title;
-      document.getElementById('dateImg').src = optionsData[key].img;
-      document.getElementById('dateDesc').innerText = optionsData[key].desc;
-      goToStep(2);
-    }
-
-    function goToStep(stepNumber) {
-      document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-      document.getElementById('step' + stepNumber).classList.add('active');
-    }
-
-    function moveNoBtn() {
-      const btn = document.getElementById('noBtn');
-      const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2) + 50;
-      const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2) + 50;
-      btn.style.transform = `translate(${x}px, ${y}px)`;
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
